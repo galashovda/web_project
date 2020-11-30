@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Убрать книжку с полки</h1>
+
+<p>Вы действительно хотиде удалить книгу: {{ book }}?</p>
+
+<form action="" method="POST">
+  {% csrf_token %}
+  <input type="submit" action="" value="Да, удалить." />
+</form>
+
+{% endblock %}
