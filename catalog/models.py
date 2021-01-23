@@ -5,7 +5,7 @@ from django.db import DatabaseError, transaction
 class Genre(models.Model):
     name = models.CharField(
         max_length=200,
-        help_text="Enter a book genre (e.g. Science Fiction, French Poetry etc.)"
+        help_text="Введите жанр"
         )
 
     def __str__(self):
@@ -14,7 +14,7 @@ class Genre(models.Model):
 
 class Language(models.Model):
     name = models.CharField(max_length=200,
-                            help_text="Enter the book's natural language (e.g. English, French, Japanese etc.)")
+                            help_text="Введите естественный язык книги (например, английский, французский, японский и т. д.)")
 
     def __str__(self):
         return self.name
@@ -23,12 +23,12 @@ class Language(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
-    summary = models.TextField(max_length=1000, help_text="Enter a brief description of the book")
+    summary = models.TextField(max_length=1000, help_text="Введите краткое описание книги")
     isbn = models.CharField('ISBN', max_length=13,
                             help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn'
                                       '">ISBN number</a>')
-    genre = models.ManyToManyField(Genre, help_text="Select a genre for this book")
-    #language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
+    genre = models.ManyToManyField(Genre, help_text="Выберете жанр")
+    language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
 
     def display_genre(self):
         return ', '.join([genre.name for genre in self.genre.all()[:3]])
@@ -50,9 +50,9 @@ from django.contrib.auth.models import User
 
 
 class BookInstance(models.Model):
-    """Model representing a specific copy of a book (i.e. that can be borrowed from the library)."""
+    """Модель, представляющая собой конкретный экземпляр книги (то есть тот, который можно позаимствовать из библиотеки)."""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
-                          help_text="Unique ID for this particular book across whole library")
+                          help_text="Уникальный идентификатор для этой конкретной книги")
     book = models.ForeignKey('Book', on_delete=models.SET_NULL, null=True)
     imprint = models.CharField(max_length=200)
     due_back = models.DateField(null=True, blank=True)
@@ -97,9 +97,9 @@ class Author(models.Model):
         ordering = ['last_name', 'first_name']
 
     def get_absolute_url(self):
-        """Returns the url to access a particular author instance."""
+        """Возвращает URL-адрес для доступа к конкретному экземпляру author."""
         return reverse('author-detail', args=[str(self.id)])
 
     def __str__(self):
-        """String for representing the Model object."""
+        """Строка для представления объекта модели."""
         return '{0}, {1}'.format(self.last_name, self.first_name)
