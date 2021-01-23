@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<h1>Убрать книжку с полки</h1>
+<h1>Удалить книгу</h1>
 
 <p>Вы действительно хотиде удалить книгу: {{ book }}?</p>
 
 <form action="" method="POST">
   {% csrf_token %}
-  <input type="submit" action="" value="Да, удалить." />
+  <input type="submit" action="" value="Да, удалить" />
 </form>
 
 {% endblock %}
