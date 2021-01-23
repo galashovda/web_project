@@ -25,8 +25,8 @@ class Book(models.Model):
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
     summary = models.TextField(max_length=1000, help_text="Введите краткое описание книги")
     isbn = models.CharField('ISBN', max_length=13,
-                            help_text='13 Character <a href="https://www.isbn-international.org/content/what-isbn'
-                                      '">ISBN number</a>')
+                            help_text='13 символов <a href="https://www.isbn-international.org/content/what-isbn'
+                                      '">ISBN номер</a>')
     genre = models.ManyToManyField(Genre, help_text="Выберете жанр")
     #language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
 
