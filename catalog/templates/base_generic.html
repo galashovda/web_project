@@ -18,6 +18,9 @@
           <li><a href="{% url 'index' %}">Главная</a></li>
           <li><a href="{% url 'books' %}">Все книги</a></li>
           <li><a href="{% url 'authors' %}">Авторы</a></li>
+          
+          <li><a href="{% url 'renew-book-librarian' %}">renew-book-librarian</a></li>
+          
             <p>{% if user.is_authenticated %}</p>
          <li>Пользователь: {{ user.get_username }}</li>
          <li><a href="{% url 'my-borrowed' %}">Мой заимствованые книги</a></li>
